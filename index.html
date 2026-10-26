@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ==========================================================================
+         [REEMPLAZAR AQUÍ: TÍTULO Y METADATOS DEL PRESSKIT]
+         ========================================================================== -->
+    <title>SKATYWALLS — Industrial Hard Techno</title>
+    <meta name="description" content="SKATYWALLS es un DJ y productor de Industrial Hard Techno.">
+    <meta name="theme-color" content="#0a0000">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+    <!-- ==========================================================================
+         URL PÚBLICA DEL SITIO (GitHub Pages)
+         WhatsApp / Instagram / Facebook exigen URLs absolutas para la vista previa.
+         Si el sitio cambia de dirección, actualiza og:url, og:image y twitter:image.
+         ========================================================================== -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SKATYWALLS">
+    <meta property="og:title" content="SKATYWALLS — Industrial Hard Techno">
+    <meta property="og:description" content="DJ y productor de Industrial Hard Techno.">
+    <meta property="og:url" content="https://skatywallsbooking-tech.github.io/">
+    <meta property="og:image" content="https://skatywallsbooking-tech.github.io/img/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="SKATYWALLS — Industrial Hard Techno">
+    <meta property="og:locale" content="es_CL">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SKATYWALLS — Industrial Hard Techno">
+    <meta name="twitter:description" content="DJ y productor de Industrial Hard Techno.">
+    <meta name="twitter:image" content="https://skatywallsbooking-tech.github.io/img/og-image.jpg">
+
+    <!-- Stencil industrial para el nombre y títulos, Archivo para el texto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Big+Shoulders+Stencil+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --------------------------------------------------------------------------
+           PALETA: rojos sacados directamente de las fotos de Gárgolas
+           (tubos de neón, luz roja sobre el humo y la oscuridad del galpón)
+           -------------------------------------------------------------------------- */
+        :root {
+            --void: #0a0000;      /* negro del galpón, con fondo rojo */
+            --oxide: #1c0303;     /* sombra roja */
+            --blood: #4a0000;     /* luz roja sobre el humo */
+            --signal: #8f0000;    /* rojo medio de las fotos */
+            --neon: #f00a0a;      /* tubo de neón */
+            --glow: rgba(240, 10, 10, 0.55);
+            --bone: #f1e9e6;      /* texto */
+            --ash: #a8928f;       /* texto secundario */
+
+            --font-stencil: 'Big Shoulders Stencil Display', 'Impact', sans-serif;
+            --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+
+            /* 160 BPM = 0.375s por golpe */
+            --beat: 0.375s;
+            --gutter: clamp(16px, 4vw, 56px);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--void);
+            color: var(--bone);
+            font-family: var(--font-body);
+            font-size: 1.0625rem;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--neon); color: var(--void); }
+
+        a { color: inherit; }
+
+        :focus-visible {
+            outline: 2px solid var(--neon);
+            outline-offset: 4px;
+        }
+
+        img { display: block; max-width: 100%; }
+
+        /* --------------------------------------------------------------------------
+           1. FONDO: estructura de acero remachado vista desde abajo + grano
+           Queda fija detrás de todo; las secciones la tapan con negro y las
+           "ventanas" entre secciones la dejan ver.
+           -------------------------------------------------------------------------- */
+        .stage {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: var(--void);
+        }
+
+        /* [REEMPLAZAR AQUÍ: FOTO DE FONDO] — img/web/estructura.jpg (horizontal) y
+           estructura-movil.jpg (vertical), ambas en duotono.
+           Foto: "Photo of an Iron Construction", Pexels (licencia libre, uso comercial permitido) */
+        .stage-photo {
+            position: absolute;
+            inset: -3%;
+            background: url('img/web/estructura.jpg') center / cover no-repeat;
+            filter: brightness(0.8) contrast(1.08);
+        }
+
+        @media (max-aspect-ratio: 4/5) {
+            .stage-photo { background-image: url('img/web/estructura-movil.jpg'); }
+        }
+
+        /* Luz roja de neón cayendo desde arriba sobre los fierros */
+        .stage-tint {
+            position: absolute;
+            inset: 0;
+            mix-blend-mode: screen;
+            background:
+                radial-gradient(70% 55% at 50% 0%, rgba(240, 10, 10, 0.32), transparent 70%),
+                radial-gradient(40% 50% at 90% 60%, rgba(143, 0, 0, 0.28), transparent 70%);
+        }
+
+        /* Óxido y vignette: el centro respira, los bordes se van a negro */
+        .stage-shade {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(120% 90% at 50% 35%, transparent 0%, rgba(10, 0, 0, 0.45) 65%, rgba(10, 0, 0, 0.92) 100%);
+        }
+
+        .stage-grain {
+            position: absolute;
+            inset: 0;
+            opacity: 0.11;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* Modo rave: el galpón late a 160 BPM. Un solo golpe suave por beat
+           (2,7 por segundo, bajo el umbral de 3 destellos/seg). */
+        body.rave .stage-photo {
+            animation: kick var(--beat) infinite cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+
+        @keyframes kick {
+            0%   { filter: brightness(1.15) contrast(1.2); }
+            100% { filter: brightness(0.8) contrast(1.08); }
+        }
+
+        body.rave .tube {
+            animation: tubePulse var(--beat) infinite ease-out;
+        }
+
+        @keyframes tubePulse {
+            0%   { box-shadow: 0 0 6px var(--neon), 0 0 28px var(--glow), 0 0 80px var(--glow); }
+            100% { box-shadow: 0 0 4px var(--neon), 0 0 14px var(--glow); }
+        }
+
+        /* --------------------------------------------------------------------------
+           2. TUBO DE NEÓN: separa las secciones y se enciende al cargar
+           -------------------------------------------------------------------------- */
+        .tube {
+            height: 3px;
+            margin: 0 var(--gutter);
+            background: #ff6a5c;
+            border-radius: 2px;
+            box-shadow: 0 0 4px var(--neon), 0 0 14px var(--glow);
+            animation: ignite 1.4s steps(1, end) both;
+        }
+
+        /* Cada tubo espera apagado hasta que su ventana entra en pantalla */
+        .js .window:not(.is-lit) .tube { animation-play-state: paused; }
+
+        /* Parpadeo de fluorescente encendiéndose */
+        @keyframes ignite {
+            0%   { opacity: 0; }
+            8%   { opacity: 1; }
+            12%  { opacity: 0.1; }
+            20%  { opacity: 0.9; }
+            24%  { opacity: 0; }
+            38%  { opacity: 0; }
+            42%  { opacity: 1; }
+            48%  { opacity: 0.35; }
+            54%  { opacity: 1; }
+            100% { opacity: 1; }
+        }
+
+        /* --------------------------------------------------------------------------
+           3. BARRA SUPERIOR
+           -------------------------------------------------------------------------- */
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.85rem var(--gutter);
+            background: linear-gradient(to bottom, rgba(10, 0, 0, 0.85), rgba(10, 0, 0, 0));
+        }
+
+        .brand {
+            font-family: var(--font-stencil);
+            font-weight: 900;
+            font-size: 1.35rem;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+        }
+
+        .topbar nav {
+            display: flex;
+            gap: 1.75rem;
+            margin-left: auto;
+            font-size: 0.9375rem;
+            font-stretch: 85%;
+            font-weight: 600;
+        }
+
+        .topbar nav a {
+            text-decoration: none;
+            color: var(--ash);
+        }
+
+        .topbar nav a:hover { color: var(--bone); }
+
+        .rave-toggle {
+            font: inherit;
+            font-size: 0.875rem;
+            font-stretch: 85%;
+            font-weight: 700;
+            color: var(--bone);
+            background: rgba(10, 0, 0, 0.6);
+            border: 1px solid var(--signal);
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+        }
+
+        .rave-toggle[aria-pressed="true"] {
+            background: var(--neon);
+            border-color: var(--neon);
+            color: var(--void);
+            box-shadow: 0 0 18px var(--glow);
+        }
+
+        @media (max-width: 720px) {
+            .topbar nav { display: none; }
+        }
+
+        /* --------------------------------------------------------------------------
+           4. HERO: la foto de las velas y el nombre en stencil gigante
+           -------------------------------------------------------------------------- */
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 6rem var(--gutter) clamp(2rem, 5vw, 4rem);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 45% 35%;
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(to top, var(--void) 0%, rgba(10, 0, 0, 0.75) 28%, rgba(10, 0, 0, 0.1) 60%, rgba(10, 0, 0, 0.45) 100%);
+        }
+
+        .hero h1 {
+            margin: 0 0 0 -0.04em;
+            font-family: var(--font-stencil);
+            font-weight: 900;
+            /* El ancho de "SKATYWALLS" es ~4,8 veces el tamaño: 18.6vw llena la pantalla sin salirse */
+            font-size: clamp(4.25rem, 18.6vw, 22rem);
+            line-height: 0.78;
+            letter-spacing: -0.005em;
+            text-shadow: 0 0 40px rgba(240, 10, 10, 0.35);
+        }
+
+        .hero-foot {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.5rem 3rem;
+            margin-top: clamp(1.25rem, 3vw, 2.25rem);
+        }
+
+        .lede {
+            margin: 0;
+            max-width: 30ch;
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            line-height: 1.3;
+            font-stretch: 90%;
+            font-weight: 500;
+        }
+
+        .lede span { color: var(--ash); }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.95rem 1.4rem;
+            font: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            font-stretch: 88%;
+            text-decoration: none;
+            border: 2px solid var(--neon);
+            cursor: pointer;
+            transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-neon {
+            background: var(--neon);
+            color: var(--void);
+            box-shadow: 0 0 22px var(--glow);
+        }
+
+        .btn-neon:hover { background: transparent; color: var(--bone); }
+
+        .btn-line {
+            background: rgba(10, 0, 0, 0.55);
+            color: var(--bone);
+        }
+
+        .btn-line:hover { background: var(--neon); color: var(--void); }
+
+        .btn svg { width: 1.25em; height: 1.25em; fill: currentColor; }
+
+        /* --------------------------------------------------------------------------
+           5. SECCIONES: etiqueta a la izquierda, contenido a la derecha
+           -------------------------------------------------------------------------- */
+        .block {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 1rem 3rem;
+            padding: clamp(3.5rem, 8vw, 7rem) var(--gutter);
+            background: rgba(10, 0, 0, 0.88);
+        }
+
+        /* Ventana: un tramo sin tapar donde se ven los fierros del fondo,
+           con un tubo de neón colgando al medio */
+        .window {
+            display: flex;
+            align-items: center;
+            min-height: clamp(220px, 48vh, 560px);
+            background: linear-gradient(to bottom,
+                rgba(10, 0, 0, 0.88) 0%,
+                rgba(10, 0, 0, 0.1) 22%,
+                rgba(10, 0, 0, 0.1) 78%,
+                rgba(10, 0, 0, 0.88) 100%);
+        }
+
+        .window .tube { flex: 1; }
+
+        @media (min-width: 900px) {
+            .block { grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr); }
+        }
+
+        .block-label {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            font-stretch: 85%;
+            color: var(--neon);
+            text-shadow: 0 0 12px var(--glow);
+        }
+
+        /* Bio */
+        .bio {
+            margin: 0;
+            max-width: 40ch;
+            font-size: clamp(1.375rem, 2.6vw, 2.125rem);
+            line-height: 1.32;
+            font-weight: 500;
+            font-stretch: 92%;
+        }
+
+        /* SoundCloud */
+        .player {
+            width: 100%;
+            height: 420px;
+            border: 0;
+            background: var(--oxide);
+        }
+
+        .player-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--ash);
+            font-weight: 600;
+            text-underline-offset: 4px;
+        }
+
+        .player-link:hover { color: var(--bone); }
+
+        /* Colectivos: como el lineup de un flyer */
+        .lineup {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-stencil);
+            font-weight: 900;
+            font-size: clamp(2.5rem, 7.5vw, 6.5rem);
+            line-height: 0.92;
+            text-transform: uppercase;
+        }
+
+        .lineup li {
+            padding: 0.12em 0;
+            border-bottom: 1px solid var(--blood);
+        }
+
+        .lineup li:first-child { border-top: 1px solid var(--blood); }
+
+        /* --------------------------------------------------------------------------
+           PRÓXIMAS FECHAS: cada fecha es una placa del mismo hierro de la galería,
+           con el día en stencil y una junta soldada separándolo de la info.
+           -------------------------------------------------------------------------- */
+        .gigs {
+            display: grid;
+            gap: 14px;
+            max-width: 980px;
+        }
+
+        .gig {
+            position: relative;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 0 clamp(1.25rem, 3vw, 2.5rem);
+            padding: clamp(1rem, 2vw, 1.5rem) clamp(1.25rem, 3vw, 2.25rem);
+            background:
+                linear-gradient(180deg, rgba(240, 10, 10, 0.2), transparent 18%),
+                /* más oscuro que la galería para que el texto se lea */
+                linear-gradient(rgba(10, 0, 0, 0.72), rgba(10, 0, 0, 0.84)),
+                url('img/web/estructura.jpg') center 30% / cover;
+        }
+
+        .gig > * { position: relative; }
+
+        .gig-date {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-right: clamp(1.25rem, 3vw, 2.5rem);
+            /* junta soldada */
+            border-right: 1px solid rgba(0, 0, 0, 0.75);
+            box-shadow: 1px 0 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .gig-day {
+            font-family: var(--font-stencil);
+            font-weight: 900;
+            font-size: clamp(3.25rem, 7vw, 5.5rem);
+            line-height: 0.85;
+        }
+
+        .gig-month {
+            margin-top: 0.3rem;
+            font-weight: 700;
+            font-stretch: 85%;
+            color: var(--neon);
+            text-shadow: 0 0 12px var(--glow);
+        }
+
+        .gig-name {
+            margin: 0;
+            font-family: var(--font-stencil);
+            font-weight: 900;
+            font-size: clamp(1.75rem, 4vw, 3rem);
+            line-height: 0.95;
+            text-transform: uppercase;
+            overflow-wrap: anywhere;
+        }
+
+        .gig-place {
+            margin: 0.4rem 0 0;
+            color: var(--ash);
+            font-stretch: 90%;
+        }
+
+        @media (max-width: 600px) {
+            .gig { grid-template-columns: auto minmax(0, 1fr); }
+            .gig-tickets { grid-column: 1 / -1; justify-self: start; margin-top: 1.25rem; }
+        }
+
+        /* --------------------------------------------------------------------------
+           FOTOS: montadas en hierro
+           Las vigas usan la textura de la estructura del fondo, con juntas
+           soldadas entre planchas y el reflejo del neón rojo desde arriba.
+           -------------------------------------------------------------------------- */
+        .block.block-rig { grid-template-columns: minmax(0, 1fr); }
+        .block-rig .block-label { text-align: center; }
+
+        .frame {
+            --beam: clamp(10px, 1.6vw, 22px);
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: var(--beam);
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: var(--beam);
+            background:
+                /* el neón rojo pega desde arriba y se pierde hacia abajo */
+                linear-gradient(180deg, rgba(240, 10, 10, 0.18), transparent 10%),
+                /* oscurecer para que las fotos manden */
+                linear-gradient(rgba(10, 0, 0, 0.45), rgba(10, 0, 0, 0.6)),
+                /* las vigas son los mismos fierros del fondo */
+                url('img/web/estructura.jpg') center 55% / cover;
+        }
+
+        @media (min-width: 720px) {
+            .frame { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        /* Sombra del hierro (galería y cards de fechas) */
+        .frame,
+        .gig {
+            box-shadow:
+                0 0 0 1px #000,
+                0 -18px 50px -30px rgba(240, 10, 10, 0.55),
+                0 40px 80px rgba(0, 0, 0, 0.75);
+        }
+
+        /* Grano del metal */
+        .frame::before,
+        .gig::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.22;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+        }
+
+        .frame a {
+            position: relative;
+            display: block;
+            background: var(--void);
+            /* canto cortado de la plancha, con el brillo rojo en el borde de arriba */
+            box-shadow:
+                0 0 0 1px #000,
+                0 -1px 0 1px rgba(255, 80, 70, 0.14);
+        }
+
+        .frame img {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+        }
+
+        /* La foto queda hundida dentro del hierro */
+        .frame a::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            box-shadow:
+                inset 0 0 0 1px rgba(0, 0, 0, 0.9),
+                inset 0 10px 18px rgba(0, 0, 0, 0.75);
+        }
+
+        /* Junta soldada al medio de cada viga, donde se unen las planchas */
+        .frame a::before {
+            content: '';
+            position: absolute;
+            inset: calc(var(--beam) / -2);
+            pointer-events: none;
+            border: 1px solid rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.025), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+        }
+
+        .frame a:hover img { filter: brightness(1.08); }
+
+        /* Booking */
+        .mail {
+            display: inline-block;
+            font-family: var(--font-stencil);
+            font-weight: 900;
+            font-size: clamp(2.25rem, 7vw, 6rem);
+            line-height: 0.95;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .mail:hover { color: var(--neon); text-shadow: 0 0 24px var(--glow); }
+
+        .booking-actions { margin-top: 2rem; }
+
+        .footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 2rem var(--gutter) 2.5rem;
+            background: rgba(10, 0, 0, 0.88);
+            color: var(--ash);
+            font-size: 0.9375rem;
+            font-stretch: 88%;
+        }
+
+        .footer a { text-underline-offset: 4px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .tube { animation: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stage" aria-hidden="true">
+        <div class="stage-photo"></div>
+        <div class="stage-tint"></div>
+        <div class="stage-shade"></div>
+        <div class="stage-grain"></div>
+    </div>
+
+    <header class="topbar">
+        <a href="#top" class="brand">SKATYWALLS</a>
+        <nav aria-label="Secciones">
+            <a href="#bio">Bio</a>
+            <a href="#musica">Música</a>
+            <a href="#proximas">Fechas</a>
+            <a href="#fotos">Fotos</a>
+            <a href="#booking">Booking</a>
+        </nav>
+        <button id="raveToggle" class="rave-toggle" type="button" aria-pressed="false" title="Atención: el modo rave hace latir el fondo a 160 BPM">
+            Modo rave
+        </button>
+    </header>
+
+    <main id="top">
+
+        <!-- ======================================================================
+             HERO
+             [REEMPLAZAR AQUÍ: FOTO PRINCIPAL] — img/web/hero.jpg y hero-movil.jpg
+             ====================================================================== -->
+        <section class="hero">
+            <img
+                class="hero-photo"
+                src="img/web/hero.jpg"
+                srcset="img/web/hero-movil.jpg 1200w, img/web/hero.jpg 2400w"
+                sizes="100vw"
+                alt="Cabina iluminada por tubos de neón rojo y velas encendidas"
+                fetchpriority="high"
+            >
+            <h1>SKATYWALLS</h1>
+            <div class="hero-foot">
+                <p class="lede">DJ y productor de Industrial Hard Techno. <span>160–180 BPM, desde Talca, Chile.</span></p>
+                <div class="actions">
+                    <a class="btn btn-neon" href="https://soundcloud.com/user-828468565" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.2 14.6c0 1 .3 1.7.8 2.1V12.5c-.5.4-.8 1.1-.8 2.1zm1.6-3v5.6c.2.1.5.1.8.1V11.4c-.3 0-.6.1-.8.2zm1.6-.3v6h.8v-6c-.3-.1-.5-.1-.8 0zm1.6.3v5.7h.8V11c-.3.2-.6.4-.8.6zm1.6-1.5v7.2h.8V9.3c-.3.2-.6.5-.8.8zm1.6-1.4v8.6h.8V8.4c-.3.1-.6.2-.8.3zm1.6-.6v9.2h.8V8c-.3 0-.6 0-.8.1zm1.6.2v9h7.4c1.7 0 3-1.3 3-3s-1.3-3-3-3c-.4 0-.8.1-1.2.2-.3-2.9-2.8-5.2-5.8-5.2-.1 0-.3 0-.4.1v.9z"/></svg>
+                        Escuchar en SoundCloud
+                    </a>
+                    <a class="btn btn-line" href="#booking">Contratar</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="window" aria-hidden="true"><div class="tube"></div></div>
+
+        <!-- ======================================================================
+             BIO
+             ====================================================================== -->
+        <section id="bio" class="block">
+            <h2 class="block-label">Bio</h2>
+            <p class="bio">
+                SKATYWALLS es un DJ y productor de Industrial Hard Techno. Sus sets destacan por una selección intensa de kicks demoledores y atmósferas oscuras que llevan la tensión al límite. Skatywalls construye un viaje sonoro de alta intensidad donde la velocidad, la crudeza y el impacto dominan la pista de principio a fin.
+            </p>
+        </section>
+
+        <!-- ======================================================================
+             MÚSICA — reproductor oficial de SoundCloud con el perfil completo
+             ====================================================================== -->
+        <section id="musica" class="block">
+            <h2 class="block-label">Música</h2>
+            <div>
+                <iframe
+                    class="player"
+                    title="SKATYWALLS en SoundCloud"
+                    loading="lazy"
+                    allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-828468565&color=%23f00a0a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
+                </iframe>
+                <a class="player-link" href="https://soundcloud.com/user-828468565" target="_blank" rel="noopener noreferrer">Ver todos los sets en SoundCloud</a>
+            </div>
+        </section>
+
+        <div class="window" aria-hidden="true"><div class="tube"></div></div>
+
+        <!-- ======================================================================
+             PRÓXIMAS FECHAS
+             [REEMPLAZAR AQUÍ: FECHAS] — para agregar una, copia el bloque <article>
+             completo. Al <time>
+             agrégale datetime="2026-11-14" con la fecha real y en href el link a las entradas.
+             ====================================================================== -->
+        <section id="proximas" class="block">
+            <h2 class="block-label">Próximas fechas</h2>
+            <div class="gigs">
+                <article class="gig">
+                    <time class="gig-date">
+                        <span class="gig-day">00</span>
+                        <span class="gig-month">Lorem</span>
+                    </time>
+                    <div class="gig-info">
+                        <h3 class="gig-name">Lorem ipsum</h3>
+                        <p class="gig-place">Dolor sit amet, Lorem</p>
+                    </div>
+                    <a class="btn btn-line gig-tickets" href="#" target="_blank" rel="noopener noreferrer">Entradas</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             HA TOCADO EN
+             [REEMPLAZAR AQUÍ: COLECTIVOS] — para agregar uno, copia una línea <li>
+             ====================================================================== -->
+        <section id="colectivos" class="block">
+            <h2 class="block-label">Ha tocado en</h2>
+            <ul class="lineup">
+                <li>Gargolas</li>
+                <li>Visualtechno</li>
+                <li>PuntadasNen</li>
+                <li>Blackhome Kolective</li>
+                <li>Interferencia</li>
+                <li>NoiseProd</li>
+            </ul>
+        </section>
+
+        <!-- ======================================================================
+             FOTOS — versiones livianas en img/web/ (originales en Documentos/Skatty-fotos-originales)
+             ====================================================================== -->
+        <section id="fotos" class="block block-rig">
+            <h2 class="block-label">Fotos</h2>
+
+            <div class="frame">
+                <a href="img/web/foto-01.jpg" target="_blank" rel="noopener"><img src="img/web/foto-01.jpg" loading="lazy" alt="Desde la cabina, brazo en alto frente al público, en blanco y negro"></a>
+                <a href="img/web/foto-02.jpg" target="_blank" rel="noopener"><img src="img/web/foto-02.jpg" loading="lazy" alt="Cabina con capucha, velas y tubos de neón rojo"></a>
+                <a href="img/web/foto-03.jpg" target="_blank" rel="noopener"><img src="img/web/foto-03.jpg" loading="lazy" alt="Silueta a contraluz entre el humo, en blanco y negro"></a>
+                <a href="img/web/foto-04.jpg" target="_blank" rel="noopener"><img src="img/web/foto-04.jpg" loading="lazy" alt="Junto a los equipos bajo luz roja"></a>
+                <a href="img/web/foto-05.jpg" target="_blank" rel="noopener"><img src="img/web/foto-05.jpg" loading="lazy" alt="De espaldas con los brazos abiertos hacia la pista, en blanco y negro"></a>
+                <a href="img/web/foto-06.jpg" target="_blank" rel="noopener"><img src="img/web/foto-06.jpg" loading="lazy" alt="Mano en alto sobre los controles, en penumbra roja"></a>
+            </div>
+        </section>
+
+        <div class="window" aria-hidden="true"><div class="tube"></div></div>
+
+        <section id="booking" class="block">
+            <h2 class="block-label">Booking</h2>
+            <div>
+                <a id="bookingEmail" class="mail" href="mailto:skatywalls@gmail.com?subject=Booking%20SKATYWALLS">booking@skatywalls.com</a>
+                <div class="actions booking-actions">
+                    <button id="copyEmailBtn" class="btn btn-line" type="button">Copiar correo</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <span>© 2026 SKATYWALLS</span>
+        <a href="https://soundcloud.com/user-828468565" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+    </footer>
+
+    <script>
+        // Los tubos de neón se encienden al aparecer en pantalla
+        document.documentElement.classList.add('js');
+        const lightUp = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-lit');
+                lightUp.unobserve(entry.target);
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.window').forEach((w) => lightUp.observe(w));
+
+        // Modo rave: el fondo late a 160 BPM solo si el visitante lo pide
+        const raveToggle = document.getElementById('raveToggle');
+        raveToggle.addEventListener('click', () => {
+            const on = document.body.classList.toggle('rave');
+            raveToggle.setAttribute('aria-pressed', String(on));
+        });
+
+        // Copiar correo de booking
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        copyEmailBtn.addEventListener('click', async () => {
+            const email = document.getElementById('bookingEmail').textContent.trim();
+            try {
+                await navigator.clipboard.writeText(email);
+                copyEmailBtn.textContent = 'Correo copiado';
+            } catch {
+                copyEmailBtn.textContent = email;
+            }
+            setTimeout(() => { copyEmailBtn.textContent = 'Copiar correo'; }, 2000);
+        });
+    </script>
+</body>
+</html>
