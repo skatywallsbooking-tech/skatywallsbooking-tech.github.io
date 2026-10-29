@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +37,9 @@
     <!-- Stencil industrial para el nombre y títulos, Archivo para el texto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Big+Shoulders+Stencil+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Big+Shoulders+Stencil+Display:wght@700;900&display=swap"
+        rel="stylesheet">
 
     <style>
         /* --------------------------------------------------------------------------
@@ -44,14 +47,21 @@
            (tubos de neón, luz roja sobre el humo y la oscuridad del galpón)
            -------------------------------------------------------------------------- */
         :root {
-            --void: #0a0000;      /* negro del galpón, con fondo rojo */
-            --oxide: #1c0303;     /* sombra roja */
-            --blood: #4a0000;     /* luz roja sobre el humo */
-            --signal: #8f0000;    /* rojo medio de las fotos */
-            --neon: #f00a0a;      /* tubo de neón */
+            --void: #0a0000;
+            /* negro del galpón, con fondo rojo */
+            --oxide: #1c0303;
+            /* sombra roja */
+            --blood: #4a0000;
+            /* luz roja sobre el humo */
+            --signal: #8f0000;
+            /* rojo medio de las fotos */
+            --neon: #f00a0a;
+            /* tubo de neón */
             --glow: rgba(240, 10, 10, 0.55);
-            --bone: #f1e9e6;      /* texto */
-            --ash: #a8928f;       /* texto secundario */
+            --bone: #f1e9e6;
+            /* texto */
+            --ash: #a8928f;
+            /* texto secundario */
 
             --font-stencil: 'Big Shoulders Stencil Display', 'Impact', sans-serif;
             --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -61,9 +71,15 @@
             --gutter: clamp(16px, 4vw, 56px);
         }
 
-        *, *::before, *::after { box-sizing: border-box; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             margin: 0;
@@ -76,16 +92,24 @@
             overflow-x: hidden;
         }
 
-        ::selection { background: var(--neon); color: var(--void); }
+        ::selection {
+            background: var(--neon);
+            color: var(--void);
+        }
 
-        a { color: inherit; }
+        a {
+            color: inherit;
+        }
 
         :focus-visible {
             outline: 2px solid var(--neon);
             outline-offset: 4px;
         }
 
-        img { display: block; max-width: 100%; }
+        img {
+            display: block;
+            max-width: 100%;
+        }
 
         /* --------------------------------------------------------------------------
            1. FONDO: estructura de acero remachado vista desde abajo + grano
@@ -111,7 +135,9 @@
         }
 
         @media (max-aspect-ratio: 4/5) {
-            .stage-photo { background-image: url('img/web/estructura-movil.jpg'); }
+            .stage-photo {
+                background-image: url('img/web/estructura-movil.jpg');
+            }
         }
 
         /* Luz roja de neón cayendo desde arriba sobre los fierros */
@@ -147,8 +173,13 @@
         }
 
         @keyframes kick {
-            0%   { filter: brightness(1.15) contrast(1.2); }
-            100% { filter: brightness(0.8) contrast(1.08); }
+            0% {
+                filter: brightness(1.15) contrast(1.2);
+            }
+
+            100% {
+                filter: brightness(0.8) contrast(1.08);
+            }
         }
 
         body.rave .tube {
@@ -156,8 +187,13 @@
         }
 
         @keyframes tubePulse {
-            0%   { box-shadow: 0 0 6px var(--neon), 0 0 28px var(--glow), 0 0 80px var(--glow); }
-            100% { box-shadow: 0 0 4px var(--neon), 0 0 14px var(--glow); }
+            0% {
+                box-shadow: 0 0 6px var(--neon), 0 0 28px var(--glow), 0 0 80px var(--glow);
+            }
+
+            100% {
+                box-shadow: 0 0 4px var(--neon), 0 0 14px var(--glow);
+            }
         }
 
         /* --------------------------------------------------------------------------
@@ -173,20 +209,51 @@
         }
 
         /* Cada tubo espera apagado hasta que su ventana entra en pantalla */
-        .js .window:not(.is-lit) .tube { animation-play-state: paused; }
+        .js .window:not(.is-lit) .tube {
+            animation-play-state: paused;
+        }
 
         /* Parpadeo de fluorescente encendiéndose */
         @keyframes ignite {
-            0%   { opacity: 0; }
-            8%   { opacity: 1; }
-            12%  { opacity: 0.1; }
-            20%  { opacity: 0.9; }
-            24%  { opacity: 0; }
-            38%  { opacity: 0; }
-            42%  { opacity: 1; }
-            48%  { opacity: 0.35; }
-            54%  { opacity: 1; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 1;
+            }
+
+            12% {
+                opacity: 0.1;
+            }
+
+            20% {
+                opacity: 0.9;
+            }
+
+            24% {
+                opacity: 0;
+            }
+
+            38% {
+                opacity: 0;
+            }
+
+            42% {
+                opacity: 1;
+            }
+
+            48% {
+                opacity: 0.35;
+            }
+
+            54% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         /* --------------------------------------------------------------------------
@@ -228,7 +295,9 @@
             color: var(--ash);
         }
 
-        .topbar nav a:hover { color: var(--bone); }
+        .topbar nav a:hover {
+            color: var(--bone);
+        }
 
         .rave-toggle {
             font: inherit;
@@ -250,7 +319,9 @@
         }
 
         @media (max-width: 720px) {
-            .topbar nav { display: none; }
+            .topbar nav {
+                display: none;
+            }
         }
 
         /* --------------------------------------------------------------------------
@@ -315,7 +386,9 @@
             font-weight: 500;
         }
 
-        .lede span { color: var(--ash); }
+        .lede span {
+            color: var(--ash);
+        }
 
         .actions {
             display: flex;
@@ -344,16 +417,26 @@
             box-shadow: 0 0 22px var(--glow);
         }
 
-        .btn-neon:hover { background: transparent; color: var(--bone); }
+        .btn-neon:hover {
+            background: transparent;
+            color: var(--bone);
+        }
 
         .btn-line {
             background: rgba(10, 0, 0, 0.55);
             color: var(--bone);
         }
 
-        .btn-line:hover { background: var(--neon); color: var(--void); }
+        .btn-line:hover {
+            background: var(--neon);
+            color: var(--void);
+        }
 
-        .btn svg { width: 1.25em; height: 1.25em; fill: currentColor; }
+        .btn svg {
+            width: 1.25em;
+            height: 1.25em;
+            fill: currentColor;
+        }
 
         /* --------------------------------------------------------------------------
            5. SECCIONES: etiqueta a la izquierda, contenido a la derecha
@@ -373,16 +456,20 @@
             align-items: center;
             min-height: clamp(220px, 48vh, 560px);
             background: linear-gradient(to bottom,
-                rgba(10, 0, 0, 0.88) 0%,
-                rgba(10, 0, 0, 0.1) 22%,
-                rgba(10, 0, 0, 0.1) 78%,
-                rgba(10, 0, 0, 0.88) 100%);
+                    rgba(10, 0, 0, 0.88) 0%,
+                    rgba(10, 0, 0, 0.1) 22%,
+                    rgba(10, 0, 0, 0.1) 78%,
+                    rgba(10, 0, 0, 0.88) 100%);
         }
 
-        .window .tube { flex: 1; }
+        .window .tube {
+            flex: 1;
+        }
 
         @media (min-width: 900px) {
-            .block { grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr); }
+            .block {
+                grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr);
+            }
         }
 
         .block-label {
@@ -404,12 +491,40 @@
             font-stretch: 92%;
         }
 
+        /* Texto corrido (propuesta y música) */
+        .prose {
+            max-width: 62ch;
+            font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
+            line-height: 1.55;
+            font-stretch: 95%;
+        }
+
+        .prose p {
+            margin: 0 0 1em;
+        }
+
+        .prose p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Nombres de tracks */
+        .prose cite {
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .prose+.player {
+            margin-top: clamp(2rem, 4vw, 3rem);
+        }
+
         /* SoundCloud */
         .player {
             width: 100%;
-            height: 420px;
+            height: 166px;
             border: 0;
             background: var(--oxide);
+            /* el widget de SC solo viene en blanco: se invierte para dejarlo negro */
+            filter: invert(1) hue-rotate(180deg);
         }
 
         .player-link {
@@ -420,7 +535,9 @@
             text-underline-offset: 4px;
         }
 
-        .player-link:hover { color: var(--bone); }
+        .player-link:hover {
+            color: var(--bone);
+        }
 
         /* Colectivos: como el lineup de un flyer */
         .lineup {
@@ -439,7 +556,33 @@
             border-bottom: 1px solid var(--blood);
         }
 
-        .lineup li:first-child { border-top: 1px solid var(--blood); }
+        .lineup li:first-child {
+            border-top: 1px solid var(--blood);
+        }
+
+        /* Setup: el mismo lineup, más chico, en dos columnas */
+        .gear {
+            display: grid;
+            gap: 2.5rem 3rem;
+        }
+
+        @media (min-width: 720px) {
+            .gear {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .gear h3 {
+            margin: 0 0 0.75rem;
+            font-size: 1rem;
+            font-weight: 700;
+            font-stretch: 85%;
+            color: var(--ash);
+        }
+
+        .lineup.lineup-sm {
+            font-size: clamp(1.75rem, 4vw, 3.25rem);
+        }
 
         /* --------------------------------------------------------------------------
            PRÓXIMAS FECHAS: cada fecha es una placa del mismo hierro de la galería,
@@ -465,7 +608,9 @@
                 url('img/web/estructura.jpg') center 30% / cover;
         }
 
-        .gig > * { position: relative; }
+        .gig>* {
+            position: relative;
+        }
 
         .gig-date {
             display: flex;
@@ -509,8 +654,15 @@
         }
 
         @media (max-width: 600px) {
-            .gig { grid-template-columns: auto minmax(0, 1fr); }
-            .gig-tickets { grid-column: 1 / -1; justify-self: start; margin-top: 1.25rem; }
+            .gig {
+                grid-template-columns: auto minmax(0, 1fr);
+            }
+
+            .gig-tickets {
+                grid-column: 1 / -1;
+                justify-self: start;
+                margin-top: 1.25rem;
+            }
         }
 
         /* --------------------------------------------------------------------------
@@ -518,8 +670,13 @@
            Las vigas usan la textura de la estructura del fondo, con juntas
            soldadas entre planchas y el reflejo del neón rojo desde arriba.
            -------------------------------------------------------------------------- */
-        .block.block-rig { grid-template-columns: minmax(0, 1fr); }
-        .block-rig .block-label { text-align: center; }
+        .block.block-rig {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .block-rig .block-label {
+            text-align: center;
+        }
 
         .frame {
             --beam: clamp(10px, 1.6vw, 22px);
@@ -541,7 +698,9 @@
         }
 
         @media (min-width: 720px) {
-            .frame { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .frame {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
         }
 
         /* Sombra del hierro (galería y cards de fechas) */
@@ -602,7 +761,9 @@
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.025), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
         }
 
-        .frame a:hover img { filter: brightness(1.08); }
+        .frame a:hover img {
+            filter: brightness(1.08);
+        }
 
         /* Booking */
         .mail {
@@ -615,9 +776,14 @@
             overflow-wrap: anywhere;
         }
 
-        .mail:hover { color: var(--neon); text-shadow: 0 0 24px var(--glow); }
+        .mail:hover {
+            color: var(--neon);
+            text-shadow: 0 0 24px var(--glow);
+        }
 
-        .booking-actions { margin-top: 2rem; }
+        .booking-actions {
+            margin-top: 2rem;
+        }
 
         .footer {
             display: flex;
@@ -631,14 +797,22 @@
             font-stretch: 88%;
         }
 
-        .footer a { text-underline-offset: 4px; }
+        .footer a {
+            text-underline-offset: 4px;
+        }
 
         @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .tube { animation: none; }
+            html {
+                scroll-behavior: auto;
+            }
+
+            .tube {
+                animation: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="stage" aria-hidden="true">
@@ -655,11 +829,9 @@
             <a href="#musica">Música</a>
             <a href="#proximas">Fechas</a>
             <a href="#fotos">Fotos</a>
+            <a href="#setup">Setup</a>
             <a href="#booking">Booking</a>
         </nav>
-        <button id="raveToggle" class="rave-toggle" type="button" aria-pressed="false" title="Atención: el modo rave hace latir el fondo a 160 BPM">
-            Modo rave
-        </button>
     </header>
 
     <main id="top">
@@ -669,20 +841,19 @@
              [REEMPLAZAR AQUÍ: FOTO PRINCIPAL] — img/web/hero.jpg y hero-movil.jpg
              ====================================================================== -->
         <section class="hero">
-            <img
-                class="hero-photo"
-                src="img/web/hero.jpg"
-                srcset="img/web/hero-movil.jpg 1200w, img/web/hero.jpg 2400w"
-                sizes="100vw"
-                alt="Cabina iluminada por tubos de neón rojo y velas encendidas"
-                fetchpriority="high"
-            >
+            <img class="hero-photo" src="img/web/hero.jpg" srcset="img/web/hero-movil.jpg 1200w, img/web/hero.jpg 2400w"
+                sizes="100vw" alt="Cabina iluminada por tubos de neón rojo y velas encendidas" fetchpriority="high">
             <h1>SKATYWALLS</h1>
             <div class="hero-foot">
-                <p class="lede">DJ y productor de Industrial Hard Techno. <span>160–180 BPM, desde Talca, Chile.</span></p>
+                <p class="lede">DJ y productor de Industrial Hard Techno. <span>160–180 BPM, desde Talca, Chile.</span>
+                </p>
                 <div class="actions">
-                    <a class="btn btn-neon" href="https://soundcloud.com/user-828468565" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.2 14.6c0 1 .3 1.7.8 2.1V12.5c-.5.4-.8 1.1-.8 2.1zm1.6-3v5.6c.2.1.5.1.8.1V11.4c-.3 0-.6.1-.8.2zm1.6-.3v6h.8v-6c-.3-.1-.5-.1-.8 0zm1.6.3v5.7h.8V11c-.3.2-.6.4-.8.6zm1.6-1.5v7.2h.8V9.3c-.3.2-.6.5-.8.8zm1.6-1.4v8.6h.8V8.4c-.3.1-.6.2-.8.3zm1.6-.6v9.2h.8V8c-.3 0-.6 0-.8.1zm1.6.2v9h7.4c1.7 0 3-1.3 3-3s-1.3-3-3-3c-.4 0-.8.1-1.2.2-.3-2.9-2.8-5.2-5.8-5.2-.1 0-.3 0-.4.1v.9z"/></svg>
+                    <a class="btn btn-neon" href="https://soundcloud.com/user-828468565" target="_blank"
+                        rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M1.2 14.6c0 1 .3 1.7.8 2.1V12.5c-.5.4-.8 1.1-.8 2.1zm1.6-3v5.6c.2.1.5.1.8.1V11.4c-.3 0-.6.1-.8.2zm1.6-.3v6h.8v-6c-.3-.1-.5-.1-.8 0zm1.6.3v5.7h.8V11c-.3.2-.6.4-.8.6zm1.6-1.5v7.2h.8V9.3c-.3.2-.6.5-.8.8zm1.6-1.4v8.6h.8V8.4c-.3.1-.6.2-.8.3zm1.6-.6v9.2h.8V8c-.3 0-.6 0-.8.1zm1.6.2v9h7.4c1.7 0 3-1.3 3-3s-1.3-3-3-3c-.4 0-.8.1-1.2.2-.3-2.9-2.8-5.2-5.8-5.2-.1 0-.3 0-.4.1v.9z" />
+                        </svg>
                         Escuchar en SoundCloud
                     </a>
                     <a class="btn btn-line" href="#booking">Contratar</a>
@@ -690,36 +861,62 @@
             </div>
         </section>
 
-        <div class="window" aria-hidden="true"><div class="tube"></div></div>
+        <div class="window" aria-hidden="true">
+            <div class="tube"></div>
+        </div>
 
         <!-- ======================================================================
-             BIO
+             BIO — "Un poco de Skatywalls" (texto de Skaty)
              ====================================================================== -->
         <section id="bio" class="block">
-            <h2 class="block-label">Bio</h2>
+            <h2 class="block-label">Un poco de Skatywalls</h2>
             <p class="bio">
-                SKATYWALLS es un DJ y productor de Industrial Hard Techno. Sus sets destacan por una selección intensa de kicks demoledores y atmósferas oscuras que llevan la tensión al límite. Skatywalls construye un viaje sonoro de alta intensidad donde la velocidad, la crudeza y el impacto dominan la pista de principio a fin.
+                Matías Paredes Ortiz, productor musical más conocido como Skatywalls, comenzó en el mundo del DJ a
+                mediados de 2025, colaborando con productoras como Gárgolas, Puntadasnen, Visual Techno, Blackhome
+                Kolective y Noise Prod, entre otras. Skatywalls se adentró rápidamente en la escena talquina por el gran
+                sonido crudo, pesado e industrial que entrega en sus presentaciones.
             </p>
         </section>
 
         <!-- ======================================================================
-             MÚSICA — reproductor oficial de SoundCloud con el perfil completo
+             PROPUESTA — lo que entrega en sus sets (texto de Skaty)
              ====================================================================== -->
-        <section id="musica" class="block">
-            <h2 class="block-label">Música</h2>
-            <div>
-                <iframe
-                    class="player"
-                    title="SKATYWALLS en SoundCloud"
-                    loading="lazy"
-                    allow="autoplay"
-                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-828468565&color=%23f00a0a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
-                </iframe>
-                <a class="player-link" href="https://soundcloud.com/user-828468565" target="_blank" rel="noopener noreferrer">Ver todos los sets en SoundCloud</a>
+        <section id="propuesta" class="block">
+            <h2 class="block-label">Mi propuesta en sets</h2>
+            <div class="prose">
+                <p>Skatywalls busca entregar un set que se convierta en una explosión de energía en cada drop, con una
+                    selección musical única y rebuscada que incluye tracks propios.</p>
+                <p>Entrega kicks demoledores, screeches envolventes y subidas llenas de tensión, combinando varios
+                    efectos del setup.</p>
             </div>
         </section>
 
-        <div class="window" aria-hidden="true"><div class="tube"></div></div>
+        <!-- ======================================================================
+             MÚSICA — cómo empezó a producir (texto de Skaty) + SoundCloud
+             ====================================================================== -->
+        <section id="musica" class="block">
+            <h2 class="block-label">Mi música y mi SoundCloud</h2>
+            <div>
+                <div class="prose">
+                    <p>Skatywalls empezó a producir en 2017 y actualmente es productor oficial de la BSG, participando
+                        en varios proyectos musicales también fuera del techno.</p>
+                    <p>En 2024 se adentró en la producción de techno, aplicando todo lo aprendido con el tiempo en otros
+                        géneros. Poco después lanzó su primer release en SoundCloud, <cite>15 HORAS</cite>, mezclando el
+                        schranz con el punch del industrial.</p>
+                    <p>Actualmente se desenvuelve en el industrial techno y el hardstyle, con tracks como <cite>Heavy
+                            Fireworks</cite> y <cite>All Gas No Breaks</cite>, entre otros.</p>
+                </div>
+                <iframe class="player" title="SKATYWALLS en SoundCloud" loading="lazy" allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-828468565/track-id&color=%23f00a0a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false&show_artwork=false">
+                </iframe>
+                <a class="player-link" href="https://soundcloud.com/user-828468565" target="_blank"
+                    rel="noopener noreferrer">Ver todos los sets en SoundCloud</a>
+            </div>
+        </section>
+
+        <div class="window" aria-hidden="true">
+            <div class="tube"></div>
+        </div>
 
         <!-- ======================================================================
              PRÓXIMAS FECHAS
@@ -729,20 +926,19 @@
              ====================================================================== -->
         <section id="proximas" class="block">
             <h2 class="block-label">Próximas fechas</h2>
-            <div class="gigs">
-                <article class="gig">
-                    <time class="gig-date">
-                        <span class="gig-day">00</span>
-                        <span class="gig-month">Lorem</span>
-                    </time>
-                    <div class="gig-info">
-                        <h3 class="gig-name">Lorem ipsum</h3>
-                        <p class="gig-place">Dolor sit amet, Lorem</p>
-                    </div>
-                    <a class="btn btn-line gig-tickets" href="#" target="_blank" rel="noopener noreferrer">Entradas</a>
-                </article>
+            <article class="gig">
+                <time class="gig-date" datetime="2026-10-31">
+                    <span class="gig-day">31</span>
+                    <span class="gig-month">Oct</span>
+                </time>
+                <div class="gig-info">
+                    <h3 class="gig-name">Necropolis</h3>
+                    <p class="gig-place">Halloween · BlackHome Kolective</p>
+                </div>
+            </article>
             </div>
         </section>
+
 
         <!-- ======================================================================
              HA TOCADO EN
@@ -767,21 +963,56 @@
             <h2 class="block-label">Fotos</h2>
 
             <div class="frame">
-                <a href="img/web/foto-01.jpg" target="_blank" rel="noopener"><img src="img/web/foto-01.jpg" loading="lazy" alt="Desde la cabina, brazo en alto frente al público, en blanco y negro"></a>
-                <a href="img/web/foto-02.jpg" target="_blank" rel="noopener"><img src="img/web/foto-02.jpg" loading="lazy" alt="Cabina con capucha, velas y tubos de neón rojo"></a>
-                <a href="img/web/foto-03.jpg" target="_blank" rel="noopener"><img src="img/web/foto-03.jpg" loading="lazy" alt="Silueta a contraluz entre el humo, en blanco y negro"></a>
-                <a href="img/web/foto-04.jpg" target="_blank" rel="noopener"><img src="img/web/foto-04.jpg" loading="lazy" alt="Junto a los equipos bajo luz roja"></a>
-                <a href="img/web/foto-05.jpg" target="_blank" rel="noopener"><img src="img/web/foto-05.jpg" loading="lazy" alt="De espaldas con los brazos abiertos hacia la pista, en blanco y negro"></a>
-                <a href="img/web/foto-06.jpg" target="_blank" rel="noopener"><img src="img/web/foto-06.jpg" loading="lazy" alt="Mano en alto sobre los controles, en penumbra roja"></a>
+                <a href="img/web/foto-01.jpg" target="_blank" rel="noopener"><img src="img/web/foto-01.jpg"
+                        loading="lazy" alt="Desde la cabina, brazo en alto frente al público, en blanco y negro"></a>
+                <a href="img/web/foto-02.jpg" target="_blank" rel="noopener"><img src="img/web/foto-02.jpg"
+                        loading="lazy" alt="Cabina con capucha, velas y tubos de neón rojo"></a>
+                <a href="img/web/foto-03.jpg" target="_blank" rel="noopener"><img src="img/web/foto-03.jpg"
+                        loading="lazy" alt="Silueta a contraluz entre el humo, en blanco y negro"></a>
+                <a href="img/web/foto-04.jpg" target="_blank" rel="noopener"><img src="img/web/foto-04.jpg"
+                        loading="lazy" alt="Junto a los equipos bajo luz roja"></a>
+                <a href="img/web/foto-05.jpg" target="_blank" rel="noopener"><img src="img/web/foto-05.jpg"
+                        loading="lazy" alt="De espaldas con los brazos abiertos hacia la pista, en blanco y negro"></a>
+                <a href="img/web/foto-06.jpg" target="_blank" rel="noopener"><img src="img/web/foto-06.jpg"
+                        loading="lazy" alt="Mano en alto sobre los controles, en penumbra roja"></a>
             </div>
         </section>
 
-        <div class="window" aria-hidden="true"><div class="tube"></div></div>
+        <div class="window" aria-hidden="true">
+            <div class="tube"></div>
+        </div>
+
+        <!-- ======================================================================
+             SETUP — equipos con los que toca (de Skaty)
+             ====================================================================== -->
+        <section id="setup" class="block">
+            <h2 class="block-label">Setup</h2>
+            <div class="gear">
+                <div>
+                    <h3>Reproductores</h3>
+                    <ul class="lineup lineup-sm">
+                        <li>CDJ-3000</li>
+                        <li>XDJ-1000MK2</li>
+                        <li>XDJ-RX3</li>
+                        <li>XDJ-XR</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Mixers</h3>
+                    <ul class="lineup lineup-sm">
+                        <li>Xone:96</li>
+                        <li>DJM-900</li>
+                        <li>DJM-750</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <section id="booking" class="block">
             <h2 class="block-label">Booking</h2>
             <div>
-                <a id="bookingEmail" class="mail" href="mailto:skatywalls@gmail.com?subject=Booking%20SKATYWALLS">booking@skatywalls.com</a>
+                <a id="bookingEmail" class="mail"
+                    href="mailto:skatywalls@gmail.com?subject=Booking%20SKATYWALLS">booking@skatywalls.com</a>
                 <div class="actions booking-actions">
                     <button id="copyEmailBtn" class="btn btn-line" type="button">Copiar correo</button>
                 </div>
@@ -807,13 +1038,6 @@
         }, { threshold: 0.5 });
         document.querySelectorAll('.window').forEach((w) => lightUp.observe(w));
 
-        // Modo rave: el fondo late a 160 BPM solo si el visitante lo pide
-        const raveToggle = document.getElementById('raveToggle');
-        raveToggle.addEventListener('click', () => {
-            const on = document.body.classList.toggle('rave');
-            raveToggle.setAttribute('aria-pressed', String(on));
-        });
-
         // Copiar correo de booking
         const copyEmailBtn = document.getElementById('copyEmailBtn');
         copyEmailBtn.addEventListener('click', async () => {
@@ -828,4 +1052,5 @@
         });
     </script>
 </body>
+
 </html>
